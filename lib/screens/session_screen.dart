@@ -48,7 +48,7 @@ class _SessionScreen extends State<SessionScreen> {
         ),
         backgroundColor: AppColors.secondaryColor,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.whiteColor),
+          icon: Icon(Icons.arrow_back, color: AppColors.blackColor),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),

@@ -67,66 +67,65 @@ class SessionWidget extends StatelessWidget {
               ),
               // Conteúdo dos textos
               Positioned(
+                top: 16,
+                left: 16,
+                right: 16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppText(
+                      text: session.name,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    SizedBox(height: 4),
+                    AppText(
+                      text: 'Quadra: ${court.name}',
+                      fontSize: 14,
+                      color: Colors.white70,
+                    ),
+                    SizedBox(height: 4),
+                    AppText(
+                      text: 'Tipo: ${session.type}',
+                      fontSize: 14,
+                      color: Colors.white70,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ],
+                ),
+              ),
+              // Datas alinhadas à direita
+              Positioned(
                 bottom: 16,
                 left: 16,
                 right: 16,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    // Informações principais à esquerda
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText(
-                          text: session.name,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        SizedBox(height: 4),
-                        AppText(
-                          text: 'Quadra: ${court.name}',
-                          fontSize: 14,
-                          color: Colors.white70,
-                        ),
-                        SizedBox(height: 4),
-                        AppText(
-                          text: 'Tipo: ${session.type}',
-                          fontSize: 14,
-                          color: Colors.white70,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ],
+                    AppText(
+                      text: 'Início:',
+                      fontSize: 12,
+                      color: Colors.white70,
                     ),
-                    // Datas alinhadas à direita
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        AppText(
-                          text: 'Início:',
-                          fontSize: 12,
-                          color: Colors.white70,
-                        ),
-                        AppText(
-                          text: formatDate(session.startDate),
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                        if (session.endDate != null) ...[
-                          SizedBox(height: 4),
-                          AppText(
-                            text: 'Término:',
-                            fontSize: 12,
-                            color: Colors.white70,
-                          ),
-                          AppText(
-                            text: formatDate(session.endDate!),
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ],
+                    AppText(
+                      text: formatDate(session.startDate),
+                      fontSize: 12,
+                      color: Colors.white,
                     ),
+                    if (session.endDate != null) ...[
+                      SizedBox(height: 4),
+                      AppText(
+                        text: 'Término:',
+                        fontSize: 12,
+                        color: Colors.white70,
+                      ),
+                      AppText(
+                        text: formatDate(session.endDate!),
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ],
                   ],
                 ),
               ),

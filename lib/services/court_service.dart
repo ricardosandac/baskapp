@@ -39,6 +39,38 @@ class CourtApiService {
         "addressSTR": "Praia do Pôr do Sol",
         "description": "Quadra de vôlei de praia com vista para o mar.",
         "status": "closed"
+      },
+      {
+        "id": 5,
+        "name": "Mountain View Basketball Court",
+        "address": "202 Mountain Rd, Denver, CO",
+        "addressSTR": "Vista da Montanha, Denver",
+        "description": "Quadra de basquete com vista para as montanhas.",
+        "status": "active"
+      },
+      {
+        "id": 6,
+        "name": "Riverside Badminton Court",
+        "address": "303 River St, Portland, OR",
+        "addressSTR": "Margem do Rio, Portland",
+        "description": "Quadra de badminton ao lado do rio.",
+        "status": "under_maintenance"
+      },
+      {
+        "id": 7,
+        "name": "City Center Skate Park",
+        "address": "404 Skate Ave, San Francisco, CA",
+        "addressSTR": "Centro da Cidade, SF",
+        "description": "Parque de skate no centro da cidade.",
+        "status": "active"
+      },
+      {
+        "id": 8,
+        "name": "Beachside Volleyball Court",
+        "address": "505 Ocean Dr, Miami, FL",
+        "addressSTR": "Beira-mar, Miami",
+        "description": "Quadra de vôlei de praia com areia branca.",
+        "status": "closed"
       }
     ]''';
 
