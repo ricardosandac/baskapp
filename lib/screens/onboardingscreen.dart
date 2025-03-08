@@ -5,7 +5,7 @@ import '../utils/appconstants.dart';
 import '../utils/helper/data_functions.dart';
 import '../utils/onboarding_util/countryCodes.dart';
 import '../utils/onboarding_util/languages.dart';
-import '../widgets/apptext.dart';
+import '../utils/apptext.dart';
 import '../widgets/expanded_button_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {

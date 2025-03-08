@@ -60,7 +60,7 @@ class CourtWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      court.name ?? "",
+                      court.name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,

@@ -6,7 +6,7 @@ import 'package:baskapp/utils/appcolors.dart';
 import 'package:baskapp/utils/appconstants.dart';
 
 import '../utils/helper/data_functions.dart';
-import '../widgets/apptext.dart';
+import '../utils/apptext.dart';
 import 'home_screen.dart';
 import 'onboardingscreen.dart';
 

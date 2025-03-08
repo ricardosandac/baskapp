@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/appcolors.dart'; // Importando a cor secundária
+import '../utils/apptext.dart'; // Importando AppText
 import '/models/session.dart';
 import '/models/court.dart';
 import '/screens/session_screen.dart';
@@ -38,11 +39,11 @@ class SessionWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Container(
           margin: EdgeInsets.only(bottom: 16),
-          height: 180,
+          height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16), // Borda secundária
             image: DecorationImage(
-              image: NetworkImage('https://picsum.photos/200/300?random='+court.id.toString()),
+              image: NetworkImage('https://picsum.photos/200/300?random=' + court.id.toString()),
               fit: BoxFit.cover,
             ),
           ),
@@ -76,30 +77,24 @@ class SessionWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          session.name,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        AppText(
+                          text: session.name,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                         SizedBox(height: 4),
-                        Text(
-                          'Quadra: ${court.name}',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                          ),
+                        AppText(
+                          text: 'Quadra: ${court.name}',
+                          fontSize: 14,
+                          color: Colors.white70,
                         ),
                         SizedBox(height: 4),
-                        Text(
-                          'Tipo: ${session.type}',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                            fontStyle: FontStyle.italic,
-                          ),
+                        AppText(
+                          text: 'Tipo: ${session.type}',
+                          fontSize: 14,
+                          color: Colors.white70,
+                          fontStyle: FontStyle.italic,
                         ),
                       ],
                     ),
@@ -107,25 +102,27 @@ class SessionWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          'Início:',
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                        AppText(
+                          text: 'Início:',
+                          fontSize: 12,
+                          color: Colors.white70,
                         ),
-                        Text(
-                          formatDate(session.startDate),
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        AppText(
+                          text: formatDate(session.startDate),
+                          fontSize: 12,
+                          color: Colors.white,
                         ),
                         if (session.endDate != null) ...[
                           SizedBox(height: 4),
-                          Text(
-                            'Término:',
-                            style:
-                                TextStyle(color: Colors.white70, fontSize: 14),
+                          AppText(
+                            text: 'Término:',
+                            fontSize: 12,
+                            color: Colors.white70,
                           ),
-                          Text(
-                            formatDate(session.endDate!),
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14),
+                          AppText(
+                            text: formatDate(session.endDate!),
+                            fontSize: 12,
+                            color: Colors.white,
                           ),
                         ],
                       ],

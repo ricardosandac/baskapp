@@ -4,7 +4,7 @@ import 'package:baskapp/utils/appconstants.dart';
 import '../utils/appcolors.dart';
 import '../utils/helper/data_functions.dart';
 import '../utils/helper/gender_function.dart';
-import 'apptext.dart';
+import '../utils/apptext.dart';
 
 class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
@@ -74,7 +74,7 @@ class _ProfileCardState extends State<ProfileCard> {
             ),
             // SizedBox(height: 8),
             const AppText(
-              text: "U S E R",
+              text: "Perfil",
               fontSize: 12.0,
               color: AppColors.blackColor,
               fontWeight: FontWeight.normal,

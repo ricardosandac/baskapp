@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'profilescreen.dart';
 import '../utils/appcolors.dart';
-import '../widgets/apptext.dart';
+import '../utils/apptext.dart';
 import '../services/court_service.dart';
 import '../models/court.dart';
 import '../widgets/court_widget.dart';

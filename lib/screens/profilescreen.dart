@@ -4,7 +4,7 @@ import '/utils/helper/data_functions.dart';
 
 import '../utils/appcolors.dart';
 import '../utils/appconstants.dart';
-import '../widgets/apptext.dart';
+import '../utils/apptext.dart';
 import '../widgets/expanded_button_widget.dart';
 import '../widgets/profilecard_widget.dart';
 
@@ -82,84 +82,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
 
-      body:  Column(
-        children: [
-          const SizedBox(height: 20,),
-          const ProfileCard(),
-          const SizedBox(height: 20,),
-          const Divider(),
-           ListTile(
-            title: AppText(
-              text: "Country",
-              fontSize: 14.0,
-              color: AppColors.blackColor.withOpacity(0.6),
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: AppText(
-              text: "${setCountry} (${setCountryCode})",
-              fontSize: 20.0,
-              color: AppColors.blackColor,
-              overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.normal,
-            ),
-
-          ),
-           ListTile(
-            title: AppText(
-              text: "Language",
-              fontSize: 14.0,
-              color: AppColors.blackColor.withOpacity(0.6),
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: AppText(
-              text: "${setLang} (${setLangCode})",
-              fontSize: 20.0,
-              color: AppColors.blackColor,
-              overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.normal,
-            ),
-
-          ),
-
-          const Spacer(),
-          const AppText(
-            text: "1.0.0 Version",
-            fontSize: 12.0,
-            color: AppColors.blackColor,
-            overflow: TextOverflow.ellipsis,
-            fontWeight: FontWeight.normal,
-          ),
-
-
-          const SizedBox(height: 20,),
-          const Divider(),
-          const SizedBox(height: 20,),
-
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ExpandedButton(
-              buttonColor: AppColors.errorColor.withOpacity(1),
-              onPressed: () async {
-                // print('Button Pressed!');
-                await dataHandler.clearAllPreferences();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>  const SplashScreen()),
-                );
-              },
-              child: const AppText(
-                text: "Wipe Data",
-                fontSize: 18.0,
+      body: Container(
+        color: AppColors.backgroundColor, // Set your desired background color here
+        child: Column(
+          children: [
+            const SizedBox(height: 20,),
+            const ProfileCard(),
+            const SizedBox(height: 20,),
+            const Divider(),
+            ListTile(
+              title: AppText(
+                text: "Country",
+                fontSize: 14.0,
                 color: AppColors.whiteColor,
                 overflow: TextOverflow.ellipsis,
               ),
+              subtitle: AppText(
+                text: "${setCountry} (${setCountryCode})",
+                fontSize: 20.0,
+                color: AppColors.whiteColor,
+                overflow: TextOverflow.ellipsis,
+                fontWeight: FontWeight.normal,
+              ),
             ),
-          ),
-          const SizedBox(height: 30,),
-        ],
-      )
+            ListTile(
+              title: AppText(
+                text: "Language",
+                fontSize: 14.0,
+                color: AppColors.whiteColor,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: AppText(
+                text: "${setLang} (${setLangCode})",
+                fontSize: 20.0,
+                color: AppColors.whiteColor,
+                overflow: TextOverflow.ellipsis,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const Spacer(),
+            const AppText(
+              text: "1.0.0 Version",
+              fontSize: 12.0,
+              color: AppColors.whiteColor,
+              overflow: TextOverflow.ellipsis,
+              fontWeight: FontWeight.normal,
+            ),
+            const SizedBox(height: 20,),
+            const Divider(),
+            const SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpandedButton(
+                buttonColor: AppColors.errorColor.withOpacity(1),
+                onPressed: () async {
+                  // print('Button Pressed!');
+                  await dataHandler.clearAllPreferences();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>  const SplashScreen()),
+                  );
+                },
+                child: const AppText(
+                  text: "Wipe Data",
+                  fontSize: 18.0,
+                  color: AppColors.whiteColor,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+            const SizedBox(height: 30,),
+          ],
+        ),
+      ),
     );
   }
 }

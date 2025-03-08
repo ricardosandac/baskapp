@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:baskapp/utils/appcolors.dart';
 
-import 'apptext.dart';
+import '../utils/apptext.dart';
 
 class CapsuleWidget extends StatefulWidget {
   final String name;
