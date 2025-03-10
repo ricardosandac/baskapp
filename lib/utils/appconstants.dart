@@ -1,8 +1,10 @@
-
-
 class AppConstants{
 
   static const String userName = "userName";
+  static const String userSurname = "userSurname";
+  static const String userEmail = "userEmail";
+  static const String userPosition = "userPosition";
+  static const String userSecondaryPosition = "userSecondaryPosition";
   static const String genderValue = "gender";
   static const String countryName = "countryName";
   static const String countryCode = "countryCode";

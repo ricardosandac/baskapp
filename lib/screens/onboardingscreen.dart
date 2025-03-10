@@ -18,14 +18,16 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   DataHandler dataHandler = DataHandler();
 
-  String name = '';
+  String nome = '';
+  String sobrenome = '';
+  String email = '';
+  String? posicao;
+  String? posicaoSecundaria;
   CountryCodes? selectedCountry;
   Language? selectedLanguage;
-
-
-
-  String? gender;
-  final List<String> genders = ['Male', 'Female', 'Other'];
+  String? genero;
+  final List<String> generos = ['Masculino', 'Feminino', 'Outro'];
+  final List<String> posicoes = ['Armador', 'Ala-Armador', 'Ala', 'Ala-Pivô', 'Pivô'];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           leading: const Text(""),
           backgroundColor: AppColors.primaryColor,
           title: const AppText(
-            text: "O n b o a r d i n g",
+            text: "Cadastro",
             fontSize: 18.0,
             color: AppColors.blackColor,
             overflow: TextOverflow.ellipsis,
@@ -52,29 +54,62 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               TextField(
                 decoration: const InputDecoration(
-                    labelText: 'Name',
-                    labelStyle: TextStyle(color: AppColors.blackColor),
+                  labelText: 'Nome',
+                  labelStyle: TextStyle(color: AppColors.blackColor),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: AppColors.blackColor),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: AppColors.primaryColor),
                   ),
-
-
                 ),
                 onChanged: (value) {
                   setState(() {
-                    name = value;
+                    nome = value;
                   });
                 },
               ),
               const SizedBox(height: 20),
-
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Sobrenome',
+                  labelStyle: TextStyle(color: AppColors.blackColor),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.blackColor),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primaryColor),
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    sobrenome = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: AppColors.blackColor),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.blackColor),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primaryColor),
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
               const Row(
                 children: [
                   AppText(
-                    text: "Gender",
+                    text: "Posição",
                     fontSize: 12.0,
                     color: AppColors.blackColor,
                     overflow: TextOverflow.ellipsis,
@@ -83,7 +118,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Spacer()
                 ],
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
@@ -92,8 +127,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   color: Colors.white,
                 ),
                 child: DropdownButton<String>(
-                  value: gender,
-                  items: genders.map((String value) {
+                  value: posicao,
+                  items: posicoes.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: AppText(
@@ -106,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      gender = newValue!;
+                      posicao = newValue!;
                     });
                   },
                   underline: Container(),
@@ -116,13 +151,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   dropdownColor: Colors.white,
                 ),
               ),
-
-
               const SizedBox(height: 20),
               const Row(
                 children: [
                   AppText(
-                    text: "Country",
+                    text: "Posição Secundária",
                     fontSize: 12.0,
                     color: AppColors.blackColor,
                     overflow: TextOverflow.ellipsis,
@@ -131,13 +164,105 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Spacer()
                 ],
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: AppColors.blackColor.withOpacity(0.7)),
+                  color: Colors.white,
+                ),
+                child: DropdownButton<String>(
+                  value: posicaoSecundaria,
+                  items: posicoes.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: AppText(
+                        text: value,
+                        fontSize: 18.0,
+                        color: AppColors.blackColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      posicaoSecundaria = newValue!;
+                    });
+                  },
+                  underline: Container(),
+                  icon: const Icon(Icons.arrow_drop_down, color: AppColors.blackColor),
+                  elevation: 8,
+                  isExpanded: true,
+                  dropdownColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Row(
+                children: [
+                  AppText(
+                    text: "Gênero",
+                    fontSize: 12.0,
+                    color: AppColors.blackColor,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  Spacer()
+                ],
+              ),
+              const SizedBox(height: 5),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: AppColors.blackColor.withOpacity(0.7)),
+                  color: Colors.white,
+                ),
+                child: DropdownButton<String>(
+                  value: genero,
+                  items: generos.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: AppText(
+                        text: value,
+                        fontSize: 18.0,
+                        color: AppColors.blackColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      genero = newValue!;
+                    });
+                  },
+                  underline: Container(),
+                  icon: const Icon(Icons.arrow_drop_down, color: AppColors.blackColor),
+                  elevation: 8,
+                  isExpanded: true,
+                  dropdownColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Row(
+                children: [
+                  AppText(
+                    text: "País",
+                    fontSize: 12.0,
+                    color: AppColors.blackColor,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  Spacer()
+                ],
+              ),
+              const SizedBox(height: 5),
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(color: AppColors.blackColor.withOpacity(0.7)),
-                  color: Colors.white, // Background color
+                  color: Colors.white,
                 ),
                 child: DropdownButton<CountryCodes>(
                   value: selectedCountry,
@@ -164,12 +289,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   dropdownColor: Colors.white,
                 ),
               ),
-
               const SizedBox(height: 20),
               const Row(
                 children: [
                   AppText(
-                    text: "Language",
+                    text: "Idioma",
                     fontSize: 12.0,
                     color: AppColors.blackColor,
                     overflow: TextOverflow.ellipsis,
@@ -178,13 +302,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Spacer()
                 ],
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(color: AppColors.blackColor.withOpacity(0.7)),
-                  color: Colors.white, // Background color
+                  color: Colors.white,
                 ),
                 child: DropdownButton<Language>(
                   value: selectedLanguage,
@@ -204,42 +328,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       selectedLanguage = newValue!;
                     });
                   },
-                  underline: Container(), // Hides the underline
-                  icon: const Icon(Icons.arrow_drop_down, color: AppColors.blackColor), // Custom dropdown icon
-                  elevation: 8, // Dropdown elevation
-                  isExpanded: true, // Ensures the dropdown button expands to fill the container horizontally
-                  dropdownColor: Colors.white, // Dropdown background color
+                  underline: Container(),
+                  icon: const Icon(Icons.arrow_drop_down, color: AppColors.blackColor),
+                  elevation: 8,
+                  isExpanded: true,
+                  dropdownColor: Colors.white,
                 ),
               ),
-
-
-
-
-              const Spacer(),
               const SizedBox(height: 20),
               ExpandedButton(
                 buttonColor: AppColors.primaryColor.withOpacity(1),
                 onPressed: () async {
                   print('Button Pressed!');
-                  print(name);
-                  print(gender);
+                  print(nome);
+                  print(sobrenome);
+                  print(email);
+                  print(posicao);
+                  print(posicaoSecundaria);
+                  print(genero);
                   print(selectedCountry!.name.toString());
                   print(selectedLanguage!.name.toString());
                   print(selectedLanguage!.code.toString());
 
-
-                  await dataHandler.setStringValue(AppConstants.userName, name);
-                  await dataHandler.setStringValue(AppConstants.genderValue, gender.toString());
+                  await dataHandler.setStringValue(AppConstants.userName, nome);
+                  await dataHandler.setStringValue(AppConstants.userSurname, sobrenome);
+                  await dataHandler.setStringValue(AppConstants.userEmail, email);
+                  await dataHandler.setStringValue(AppConstants.userPosition, posicao.toString());
+                  await dataHandler.setStringValue(AppConstants.userSecondaryPosition, posicaoSecundaria.toString());
+                  await dataHandler.setStringValue(AppConstants.genderValue, genero.toString());
                   await dataHandler.setStringValue(AppConstants.countryCode, selectedCountry!.code.toString());
                   await dataHandler.setStringValue(AppConstants.countryName, selectedCountry!.name.toString());
-
                   await dataHandler.setStringValue(AppConstants.langCode, selectedLanguage!.code.toString());
                   await dataHandler.setStringValue(AppConstants.langName, selectedLanguage!.name.toString());
                   await dataHandler.setStringValue(AppConstants.doneOnboarding, "YES");
-
-
-
-
 
                   Navigator.push(
                     context,
@@ -247,7 +368,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   );
                 },
                 child: const AppText(
-                  text: "Submit Data",
+                  text: "Começar a usar",
                   fontSize: 18.0,
                   color: AppColors.blackColor,
                   overflow: TextOverflow.ellipsis,

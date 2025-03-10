@@ -96,7 +96,7 @@ class _HomeScreen extends State<HomeScreen> {
         leading: const Text(""),
         backgroundColor: AppColors.primaryColor,
         title: const AppText(
-          text: "BASKAPP",
+          text: "BaskAPP",
           fontSize: 18.0,
           color: AppColors.blackColor,
           overflow: TextOverflow.ellipsis,
@@ -144,7 +144,7 @@ class _HomeScreen extends State<HomeScreen> {
                             controller: _addressController,
                             focusNode: _focusNode,
                             decoration: InputDecoration(
-                              hintText: 'Enter address',
+                              hintText: '',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -204,7 +204,7 @@ class _HomeScreen extends State<HomeScreen> {
                         return Container(
                           margin: EdgeInsets.only(bottom: 16),
                           child: Text(
-                            'Quadras perto de voce...',
+                            'Quadras perto de você',
                             style: TextStyle(
                               color: AppColors.primaryColor,
                               fontSize: 24.0,
