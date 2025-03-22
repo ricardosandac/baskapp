@@ -42,6 +42,10 @@ class SessionWidget extends StatelessWidget {
           height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16), // Borda secundária
+            border: Border.all(
+              color: AppColors.primaryColor, // Cor primária do AppColors
+              width: 3, // Espessura da borda
+            ),
             image: DecorationImage(
               image: NetworkImage('https://picsum.photos/200/300?random=' + court.id.toString()),
               fit: BoxFit.cover,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/court.dart';
 import '/screens/court_screen.dart';
-///import 'news_webview.dart';
+import '../utils/appcolors.dart';// Certifique-se de que o caminho está correto
 
 class CourtWidget extends StatelessWidget {
   final Court court;
@@ -13,14 +13,15 @@ class CourtWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-  color: Colors.transparent, // Mantém o fundo original do Container
-  child: InkWell(
+      color: Colors.transparent, // Mantém o fundo original do Container
+      child: InkWell(
         onTap: () {
           Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CourtScreen(court: court)),
-                );
+            context,
+            MaterialPageRoute(
+              builder: (context) => CourtScreen(court: court),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(2),
         child: Container(
@@ -28,8 +29,12 @@ class CourtWidget extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: AppColors.primaryColor, // Cor primária do AppColors
+              width: 3, // Espessura da borda
+            ),
             image: DecorationImage(
-              image: NetworkImage('https://picsum.photos/200/300?random='+court.id.toString()),
+              image: NetworkImage('https://picsum.photos/200/300?random=' + court.id.toString()),
               fit: BoxFit.cover,
             ),
           ),
@@ -80,7 +85,7 @@ class CourtWidget extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ),
     );
   }
