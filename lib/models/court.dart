@@ -32,4 +32,9 @@ class Court {
     'description': description,
     'status': status};
   }
+
+  @override
+  String toString() {
+    return 'Court(id: $id, name: $name, address: $address, status: $status)';
+  }
 }

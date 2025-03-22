@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'profilescreen.dart';
+import '../screens/add_court_screen.dart';
 import '../utils/appcolors.dart';
 import '../utils/apptext.dart';
 import '../services/court_service.dart';
@@ -191,10 +192,14 @@ class _HomeScreen extends State<HomeScreen> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
+                    debugPrint('Error in FutureBuilder: ${snapshot.error}');
                     return Center(child: Text(snapshot.error.toString()));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    debugPrint('No courts found');
                     return Center(child: Text('No objects found'));
                   }
+
+                  debugPrint('Snapshot data: ${snapshot.data}');
 
                   return ListView.builder(
                     padding: EdgeInsets.all(16),
@@ -203,19 +208,47 @@ class _HomeScreen extends State<HomeScreen> {
                       if (index == 0) {
                         return Container(
                           margin: EdgeInsets.only(bottom: 16),
-                          child: Text(
-                            'Quadras perto de você',
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Quadras perto de você',
+                                style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.add, color: AppColors.primaryColor),
+                                onPressed: () async {
+                                  // Navega para a tela de adicionar quadra e aguarda o retorno
+                                  final result = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AddCourtScreen(),
+                                    ),
+                                  );
+
+                                  // Recarrega a lista de courts se uma nova quadra foi adicionada
+                                  if (result == true) {
+                                    debugPrint('New court added');
+                                    setState(() {
+                                      futureObjects = apiService.fetchObjects();
+                                      futureObjects.then((courts) {
+                                        debugPrint('Updated courts list: $courts');
+                                      });
+                                    });
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                         );
                       } else {
                         final object = snapshot.data![index - 1];
                         return CourtWidget(
-                          court: object
+                          court: object,
                         );
                       }
                     },

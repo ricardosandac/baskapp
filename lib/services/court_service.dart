@@ -1,13 +1,12 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/court.dart';
 
 class CourtApiService {
   static const String baseUrl = 'https://catfact.ninja';
 
-  Future<List<Court>> fetchObjects() async {
-    final String fakeJson = '''
-    [
+    final List<Map<String, dynamic>> _fakeCourts = [
       {
         "id": 1,
         "name": "Central Park Court",
@@ -72,18 +71,29 @@ class CourtApiService {
         "description": "Quadra de vôlei de praia com areia branca.",
         "status": "closed"
       }
-    ]''';
+    ];
+  
+  Future<List<Court>> fetchObjects() async {
+    debugPrint('Fetching courts...');
+    final String fakeJson = jsonEncode(_fakeCourts);
+    await Future.delayed(Duration(seconds: 1)); // Simula um atraso de rede
+    List<dynamic> data = jsonDecode(fakeJson);
+    debugPrint('Courts fetched: ${_fakeCourts.length} courts');
+    return data.map((json) => Court.fromJson(json)).toList();
+  }
 
-    final response = await http.get(Uri.parse('https://catfact.ninja/facts'));
-
-    if (response.statusCode == 200) {
-      // ignore: unused_local_variable
-      var body = jsonDecode(fakeJson);//response.body);
-      List<dynamic> data = jsonDecode(fakeJson);//body["data"];
-      return data.map((json) => Court.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load objects');
-    }
+  Future<void> addCourt(Court court) async {
+    debugPrint('Adding court: $court');
+    await Future.delayed(Duration(milliseconds: 500)); // Simula um atraso de rede
+    _fakeCourts.add({
+      "id": court.id,
+      "name": court.name,
+      "address": court.address,
+      "addressSTR": court.addressSTR,
+      "description": court.description,
+      "status": court.status,
+    });
+    debugPrint('Court added. Total courts: ${_fakeCourts.length}');
   }
 
   Future<void> toggleObjectStatus(int id, bool newStatus) async {
