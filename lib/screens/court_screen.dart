@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import '../utils/appcolors.dart';
 import '../utils/apptext.dart';
@@ -7,11 +5,12 @@ import '../services/session_service.dart';
 import '../models/court.dart';
 import '../models/session.dart';
 import '../widgets/session_widget.dart';
+import 'add_session_screen.dart';
 
 class CourtScreen extends StatefulWidget {
-  //const CourtScreen({super.key});
   final Court court;
-  CourtScreen({
+
+  const CourtScreen({
     Key? key,
     required this.court
   }) : super(key: key);
@@ -37,9 +36,10 @@ class _CourtScreen extends State<CourtScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left), onPressed: () {
-          Navigator.pop(context);
-        },
+          icon: const Icon(Icons.chevron_left),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: AppText(
           text: widget.court.name,
@@ -55,51 +55,61 @@ class _CourtScreen extends State<CourtScreen> {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No objects found'));
           }
+
+          final sessions = snapshot.data ?? [];
 
           return ListView.builder(
             padding: EdgeInsets.all(16),
-            itemCount: snapshot.data!.length,
+            itemCount: sessions.length + 1, // Adiciona 1 para o texto e botão no topo
             itemBuilder: (context, index) {
-              final object = snapshot.data![index];
+              if (index == 0) {
+                // Primeira posição: Texto e botão de adicionar
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText(
+                          text: 'Sessões aquecendo',
+                          fontSize: 24.0, // Ajuste para o mesmo tamanho da HomeScreen
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryColor,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add, color: AppColors.primaryColor),
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddSessionScreen(courtId: widget.court.id),
+                              ),
+                            );
+                            if (result == true) {
+                              setState(() {
+                                futureObjects = apiService.fetchObjects(); // Recarrega a lista de sessões
+                              });
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16), // Espaçamento abaixo do texto
+                  ],
+                );
+              }
+
+              // Demais posições: Lista de sessões
+              final session = sessions[index - 1]; // Ajusta o índice para ignorar o primeiro item
               return SessionWidget(
-                session: object,
-                court: widget.court
+                session: session,
+                court: widget.court,
               );
             },
           );
         },
       ),
     );
-    /*return Scaffold(
-      appBar: AppBar(title: Text('Home')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ObjectControlScreen()),
-                );
-              },
-              child: Text('Manage Objects'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsScreen()),
-                );
-              },
-              child: Text('Settings'),
-            ),
-          ],
-        ),
-      ),
-    );*/
   }
 }

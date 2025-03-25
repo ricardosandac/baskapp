@@ -113,4 +113,6 @@ class SessionApiService {
       throw Exception('Failed to update object');
     }
   }
+
+  addSession(Session newSession) {}
 }
